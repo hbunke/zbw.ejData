@@ -1,0 +1,28 @@
+<tal:block 
+    tal:define="common_view context/@@adata_common;
+                authors context/getAuthorsForTitle;
+                paper_view context/@@paperView;
+
+" >
+
+
+    <tal:type tal:content="context/portal_type" />;
+    <tal:id tal:content="context/id" />; 
+    <tal:date tal:content="common_view/published" />;
+    "<tal:title tal:content="context/Title" />";
+
+    <tal:authors tal:repeat="author authors">
+        "<tal:author tal:content="author/getFullname" />"
+    </tal:authors>;
+
+    <tal:jel tal:content="context/getJel" />;
+    <tal:downloads tal:content="common_view/downloads" />;
+    <tal:comments tal:content="paper_view/getAmountOfCommentsAsInteger" />;
+    <tal:citations tal:content="context/citations/count" />;
+    
+
+
+
+
+
+</tal:block>
