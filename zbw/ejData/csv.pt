@@ -2,26 +2,101 @@
     tal:define="common_view context/@@adata_common;
                 authors context/getAuthorsForTitle;
                 paper_view context/@@paperView;
+                pdf_dates common_view/pdf_dates;
+                pt context/portal_type;
+                dp_ja common_view/corr_paper;
+                ">
 
-" >
+<tal:header>
+
+    Paper Type;
+    ID;
+    <tal:block tal:condition="python:pt=='JournalPaper'" tal:content="string:ID of corresponding DiscussionPaper;" />
+    <tal:block tal:condition="python:pt=='DiscussionPaper'" tal:content="string:ID of corresponding JournalArticle;" />
+    Date Submission;
+    Date accepted as Discussion Paper;
+    Date published as Discussion Paper;
+    <tal:block tal:condition="python:pt=='JournalPaper'">
+         Date of paper revision;
+         Date accepted as Journal Article;
+         Date published as Journal Article;
+     </tal:block>
+    Title;
+    Authors (Affiliation);
+    JEL;
+    Number of Downloads;
+    Number of Comments;
+    Number of Citations;
+    Repec Handles of Citations;
+    Policy Paper;
+    Special Issues;
+    Survey and Overview Paper;
+    Number of Pages;
+    <tal:block tal:condition="python:pt=='JournalPaper'">
+        DOI of Journal Article;
+        Handle/DOI of Data Set;
+    </tal:block>
+</tal:header>
+    
+
 
 
     <tal:type tal:content="context/portal_type" />;
-    <tal:id tal:content="context/id" />; 
-    <tal:date tal:content="common_view/published" />;
+    <tal:id tal:content="context/id" />;
+    
+    <tal:corr tal:condition="python:pt=='JournalPaper'"
+        tal:content="dp_ja/id" />
+
+    <tal:dp_corr tal:condition="python:pt=='DiscussionPaper'">
+        <tal:corr tal:content="common_view/corr_ja" />;
+    </tal:dp_corr>
+        
+    <!-- perhaps later, when live    <tal:url tal:content="context/absolute_url" />; -->
+    
+    <tal:date_submission tal:content="pdf_dates/date_submission | string:" />;
+    <tal:date_accepted_as_dp tal:content="pdf_dates/date_accepted_as_dp | string:" />;
+    
+    <tal:date_published_as_dp>
+        <tal:date_dp
+            tal:condition="python:pt=='DiscussionPaper'"
+            tal:content="common_view/published" />
+        <tal:date_ja
+            tal:condition="python:pt=='JournalPaper'"
+            tal:content="dp_ja/@@adata_common/published" />;
+    </tal:date_published_as_dp>
+
+    <tal:ja_pub tal:condition="python:pt=='JournalPaper'">
+        <tal:date_revised tal:content="pdf_dates/date_revised | string:" />;
+        <tal:date_accepted_as_ja tal:content="pdf_dates/date_accepted_as_ja | string:" />;
+        <tal:date_published_as_ja tal:content="common_view/published" />;
+    </tal:ja_pub>
+    
     "<tal:title tal:content="context/Title" />";
 
     <tal:authors tal:repeat="author authors">
-        "<tal:author tal:content="author/getFullname" />"
+        "<tal:author tal:content="author/getFullname" />
+        (<tal:org tal:content="author/getOrganisation" />)"
     </tal:authors>;
 
     <tal:jel tal:content="context/getJel" />;
     <tal:downloads tal:content="common_view/downloads" />;
     <tal:comments tal:content="paper_view/getAmountOfCommentsAsInteger" />;
     <tal:citations tal:content="context/citations/count" />;
+    <tal:citationHandles tal:content="common_view/citation_handles" />;
+    <tal:isPolicyPaper tal:content="context/isPolicyPaper" />;
+    <tal:specialIssues tal:content="context/specialIssues" />;
+    <tal:isSurveyAndOverviewPaper tal:content="context/isSurveyAndOverviewPaper" />;
+    <tal:pages tal:content="context/getPages" />;
+
+    <tal:journalarticle tal:condition="python:pt=='JournalPaper'">
+        <tal:date_revised tal:content="pdf_dates/date_revised" />;
+        <tal:date_accepted_as_ja tal:content="pdf_dates/date_accepted_as_ja | string:" />;
+        <tal:date_published_as_ja tal:content="pdf_dates/date_published_as_ja | string:" />;
+        <tal:doi tal:content="common_view/get_doi" />;
+        <tal:dataset tal:content="paper_view/dataset_pi_url" />;
+    </tal:journalarticle>
+
     
-
-
 
 
 

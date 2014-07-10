@@ -1,26 +1,26 @@
 all papertypes:
 ===============
 
--   ID 
--   Title
--   Paper Type (Journalarticle, Discussionpaper)
--   submission date (from dp2013-22, ja2013-13)
--   date of acceptance as DP (from dp2013-22, ja2013-13)
--   published (as discussionpaper)
--   Authors
+-   ID x
+-   Title x
+-   Paper Type (Journalarticle, Discussionpaper) x
+-   submission date (from dp2013-22, ja2013-13) x
+-   date of acceptance as DP (from dp2013-22, ja2013-13) x
+-   published (as discussionpaper) x
+-   Authors x
 -   further articles of author in 'Economics'
--   author's affiliations
--   JELs
--   No. of downloads
--   exact date/time for each download (since June 2009)
--   No. of comments
+-   author's affiliations x
+-   JELs x
+-   No. of downloads x
+-   exact date/time for each download (since June 2009) 
+-   No. of comments x
 -   date of each comment
 -   author of each comment (if provided, else 'Anonymous')
--   No. of citations (as provided by Repec/Citec)
--   Repec handles of citing articles
--   is Policy Paper
--   Specialissue (if available)
--   is Survey and Overview
+-   No. of citations (as provided by Repec/Citec) x
+-   Repec handles of citing articles x
+-   is Policy Paper x
+-   Specialissue (if available) x
+-   is Survey and Overview x
 
 
 Mark hätte außerdem gerne die Affiliations der Commenter
@@ -29,11 +29,11 @@ Mark hätte außerdem gerne die Affiliations der Commenter
 + Journal Articles
 ==================
 
--   date of revision (in case of)(from ja2013-13)
--   date of acceptance as Journal Article (from ja2013-13)
--   date of publishing as Journal Article
--   DOI
--   corresponding Discussionpaper (URL and ID)
--   No. of pages (from 2011 on)
--   DOI / Handle of Data Set at Dataverse (if available)
+-   date of revision (in case of)(from ja2013-13) x
+-   date of acceptance as Journal Article (from ja2013-13) x
+-   date of publishing as Journal Article x
+-   DOI x
+-   corresponding Discussionpaper (URL and ID) 
+-   No. of pages (from 2011 on) x
+-   DOI / Handle of Data Set at Dataverse (if available) x
 
