@@ -3,18 +3,6 @@
            xmlns:browser="http://namespaces.zope.org/browser">
 
 
-  <browser:page
-      name="adata_csv"
-      for="Products.eJournal.interfaces.marker.IPaper"
-      class=".browser.CsvView"
-      permission="zope2.Public"
-      />
-
-  <browser:page
-      name="adata_common"
-      for="Products.eJournal.interfaces.marker.IPaper"
-      class=".browser.CommonView"
-      permission="zope2.Public"
-      />
+           <include package=".browser" />
 
 </configure>

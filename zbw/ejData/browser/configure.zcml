@@ -1,0 +1,29 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:browser="http://namespaces.zope.org/browser">
+
+
+
+  <browser:page
+      name="adata_csv"
+      for="Products.eJournal.interfaces.marker.IPaper"
+      class=".csv.View"
+      permission="zope2.Public"
+      />
+    
+  <browser:page
+      name="adata_json"
+      for="Products.eJournal.interfaces.marker.IPaper"
+      class=".json.View"
+      permission="zope2.Public"
+      />
+
+
+  <browser:page
+      name="adata_common"
+      for="Products.eJournal.interfaces.marker.IPaper"
+      class=".common.View"
+      permission="zope2.Public"
+      />
+
+</configure>
