@@ -36,7 +36,7 @@ class View(BrowserView):
         return click_view.getClicks()
 
 
-    def citation_handles(self):
+    def citation_handles(self, output='csv'):
         """
         """
         obj = self.context
@@ -44,11 +44,13 @@ class View(BrowserView):
         
         try:
             citations = ann['zbw.citation']['repec']
-            text = u""
-            for cite in citations:
-                text += u"'%s', " %cite
-            return text
-
+            if output == 'csv':
+                text = u""
+                for cite in citations:
+                    text += u"'%s', " %cite
+                return text
+            if output == 'json':
+                return citations
         except:
             return None
 
@@ -92,7 +94,7 @@ class View(BrowserView):
         paper_view = getMultiAdapter((self.context, self.request),name="paperView")
         if paper_view.showRelatedJournalPaper():
             rel = self.context.getBRefs('journalpaper_discussionpaper')[0]
-            return rel.getId()
+            return rel
         return False
 
     

@@ -57,7 +57,7 @@ class View(BrowserView):
         if ja and ja_dp:
             text += u"'%s'; " %ja_dp.getId()
         if dp:
-            text += u"'%s'; " %dp_ja
+            text += u"'%s'; " %dp_ja.getId()
         text += u"%s; " %pdf_dates['date_submission']
         text += u"%s; " %pdf_dates['date_accepted_as_dp']
         if dp:
@@ -77,13 +77,13 @@ class View(BrowserView):
         text += u"; "
         
         commons = (
-                view.clean_jels(),
+                self.clean_jels(),
                 view.downloads(),
                 paper_view.getAmountOfCommentsAsInteger(),
                 citation_view.count(),
                 view.citation_handles(),
                 paper.isPolicyPaper,
-                view.clean_special_issues(),
+                self.clean_special_issues(),
                 paper.isSurveyAndOverviewPaper,
                 paper.getPages(),
                 )
@@ -97,4 +97,17 @@ class View(BrowserView):
         return text
 
 
+    def clean_jels(self):
+        jels = self.context.getJel()
+        text = u""
+        for jel in jels:
+            text += "%s," %jel
+        return text
+        
+    def clean_special_issues(self):
+        sis = self.context.getSpecialIssues()
+        clean = u""
+        for si in sis:
+            clean += u"'%s'" %si
+        return clean
 

@@ -14,7 +14,7 @@
   <browser:page
       name="adata_json"
       for="Products.eJournal.interfaces.marker.IPaper"
-      class=".json.View"
+      class=".json_view.View"
       permission="zope2.Public"
       />
 
