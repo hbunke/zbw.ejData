@@ -1,7 +1,7 @@
 from Products.Five.browser import BrowserView
 #from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
-#from zope.annotation.interfaces import IAnnotations
+from zope.annotation.interfaces import IAnnotations
 from collections import OrderedDict
 from Products.CMFCore.utils import getToolByName
 
@@ -107,6 +107,7 @@ class View(BrowserView):
 
             jo['JEL'] = paper.getJel()
             jo['downloads'] = view.downloads()
+            jo['download_dates'] = self.get_clickdates()
             
             
             #comments
@@ -184,4 +185,18 @@ class View(BrowserView):
         )
         return [brain.getObject() for brain in brains]
 
+        
+    def get_clickdates(self):
+        """
+        get and format article download dates
+        """
 
+        ann = IAnnotations(self.context)
+        clickdates = ann['hbxt.clickdates'].values()
+        datelist = []
+        for clickdate in clickdates:
+            for date in clickdate:
+                d = date.strftime('%x %X')
+                datelist.append(d)
+        
+        return datelist

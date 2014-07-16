@@ -119,20 +119,7 @@ class View(BrowserView):
             return False
         return True
 
-    def clean_jels(self):
-        jels = self.context.getJel()
-        text = u""
-        for jel in jels:
-            text += "%s," %jel
-        return text
-        
-    def clean_special_issues(self):
-        sis = self.context.getSpecialIssues()
-        clean = u""
-        for si in sis:
-            clean += u"'%s'" %si
-        return clean
-
+    
 
 
 
