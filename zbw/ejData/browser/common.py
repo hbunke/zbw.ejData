@@ -5,7 +5,6 @@
 # http://zbw.eu/
 
 from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.annotation.interfaces import IAnnotations
 
@@ -27,6 +26,17 @@ class View(BrowserView):
         
         return "None"
 
+    def published_split(self):
+        """
+        """
+        created = self.context.created()
+        if created is not None:
+            year = created.strftime("%Y")
+            month = created.strftime("%B")
+            day = created.strftime("%d")
+            return (year, month, day)
+        return (u"", u"", u"")
+           
 
     def downloads(self):
         """
@@ -120,7 +130,36 @@ class View(BrowserView):
         return True
 
     
+    def split_date(self, date):
+        """
+        helper method to split date *string* (not datetime object) from pdf
+        cover dates
+        """
+        #date is expected like "Month Day, Year"
+        #first check for empty string
+        if not date:
+            return (u"", u"", u"")
+        date_split = date.split(',')
+        year = date_split[1].lstrip()
+        md = date_split[0].split()
+        month = md[0]
+        day = md[1]
+        return (year, month, day)
+        
 
+    def get_clickdates(self):
+        """
+        get and format article download dates
+        """
 
+        ann = IAnnotations(self.context)
+        clickdates = ann['hbxt.clickdates'].values()
+        datelist = []
+        for clickdate in clickdates:
+            for date in clickdate:
+                d = date.strftime('%x %X')
+                datelist.append(d)
+        
+        return datelist
 
 
