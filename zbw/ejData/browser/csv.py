@@ -32,6 +32,8 @@ class View(BrowserView):
         view = getMultiAdapter((paper, self.request), name='adata_common')
         paper_view = getMultiAdapter((paper, self.request), name='paperView')
         citation_view = getMultiAdapter((paper, self.request), name="citations")
+        dataset_url = getMultiAdapter((paper, self.request),
+                name="dataset_url")
         dp_ja = view.corr_ja()
         ja_dp = view.corr_dp()
         ja = view.is_ja()
@@ -115,7 +117,7 @@ class View(BrowserView):
         
         if ja:
             body += u"%s; " %view.get_doi()
-            body += u"%s; " %paper_view.dataset_pi_url()
+            body += u"%s; " % dataset_url()
         
         ### ah, well, customer wants it, customer gets it :-)
         clickdates = view.get_clickdates()
